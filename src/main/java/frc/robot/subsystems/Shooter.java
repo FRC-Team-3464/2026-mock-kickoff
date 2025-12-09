@@ -19,22 +19,22 @@ public class Shooter extends SubsystemBase {
 
   public SparkMaxConfig m_leftpivotMotorConfig;
   public SparkMaxConfig m_rightpivotMotorConfig;
-
   public SparkMaxConfig m_leftFlywheelMotorConfig;
   public SparkMaxConfig m_rightFlywheelMotorConfig;
+  
   public Shooter() {
     m_leftFlywheelMotorConfig = new SparkMaxConfig();
     m_rightFlywheelMotorConfig = new SparkMaxConfig();
-    
+    m_leftpivotMotorConfig = new SparkMaxConfig();
+    m_rightpivotMotorConfig = new SparkMaxConfig();
 
+    m_rightpivotMotorConfig.follow(m_rightpivotMotor, true);
     m_rightFlywheelMotorConfig.follow(m_leftFlywheelMotor, true);
 
     m_leftFlywheelMotor.configure(m_leftFlywheelMotorConfig, null, null);
     m_rightFlywheelMotor.configure(m_leftFlywheelMotorConfig, null, null);
 
-    m_leftpivotMotorConfig = new SparkMaxConfig();
-    m_rightpivotMotorConfig = new SparkMaxConfig();
-    m_rightpivotMotorConfig.follow(m_rightpivotMotor, true);
+    
 
   } // floyd
   
