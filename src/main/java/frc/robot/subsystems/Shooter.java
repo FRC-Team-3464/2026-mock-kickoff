@@ -14,7 +14,19 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */ 
   public final SparkMax m_leftFlywheelMotor = new SparkMax(7, MotorType.kBrushless);
   public final SparkMax m_rightFlywheelMotor = new SparkMax(8, MotorType.kBrushless);
-  public Shooter() {} // floyd
+
+  public final SparkMaxConfig m_leftFlywheelMotorConfig;
+  public final SparkMaxConfig m_rightFlywheelMotorConfig;
+  public Shooter() {
+    m_leftFlywheelMotorConfig = new SparkMaxConfig();
+    m_rightFlywheelMotorConfig = new SparkMaxConfig();
+
+    m_rightFlywheelMotorConfig.follow(m_leftFlywheelMotor, true);
+
+    m_leftFlywheelMotor.configure(m_leftFlywheelMotorConfig, null, null);
+    m_rightFlywheelMotor.configure(m_leftFlywheelMotorConfig, null, null);
+
+  } // floyd
 
   @Override
   public void periodic() {
