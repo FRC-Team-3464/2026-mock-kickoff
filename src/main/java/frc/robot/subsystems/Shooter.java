@@ -18,11 +18,10 @@ public class Shooter extends SubsystemBase {
   public final SparkMax m_rightPivotMotor = new SparkMax(10, MotorType.kBrushless);
 
   public RelativeEncoder m_leftFlywheelMotorEncoder = m_leftFlywheelMotor.getEncoder();
-  public RelativeEncoder m_rightFlywheelMotorEncoder = m_rightFlywheelMotor.getEncoder();
   public RelativeEncoder m_leftPivotMotorEncoder = m_leftPivotMotor.getEncoder();
-  public RelativeEncoder m_rightPivotMotorEncoder = m_rightPivotMotor.getEncoder();
 
-  private boolean is_running = false;
+  private boolean is_Flywheel_running = false;
+  private boolean is_pivotMotor_running = false;
   public SparkMaxConfig m_leftPivotMotorConfig;
   public SparkMaxConfig m_rightPivotMotorConfig;
   public SparkMaxConfig m_leftFlywheelMotorConfig;
@@ -43,12 +42,12 @@ public class Shooter extends SubsystemBase {
     m_rightPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
   } // floyd
   public void setpivotmotorspeed(double speed){
-    is_running = speed!= 0;
+    is_pivotMotor_running = speed!= 0;
     
   }
 
   public void setFlywheelMotorSpeed(double speed) {
-    
+    is_Flywheel_running = speed != 0;
   }
   
   @Override
