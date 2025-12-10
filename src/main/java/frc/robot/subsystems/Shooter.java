@@ -8,27 +8,36 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */ 
   public final SparkMax m_FlywheelMotor = new SparkMax(7, MotorType.kBrushless);
   public final SparkMax m_PivotMotor = new SparkMax(8, MotorType.kBrushless);
+  public final SparkMax m_intakeMotor = new SparkMax(9, MotorType.kBrushless);
 
+
+  public RelativeEncoder m_intakeMotorEncoder = m_intakeMotor.getEncoder();
   public RelativeEncoder m_FlywheelMotorEncoder = m_FlywheelMotor.getEncoder();
   public RelativeEncoder m_PivotMotorEncoder = m_PivotMotor.getEncoder();
 
   private boolean is_Flywheel_running = false;
   private boolean is_pivotMotor_running = false;
+  private boolean is_intakeMotor_running = false;
+  public SparkMaxConfig m_intakeMotorConfig;
   public SparkMaxConfig m_PivotMotorConfig;
   public SparkMaxConfig m_FlywheelMotorConfig;
   
   public Shooter() {
     m_FlywheelMotorConfig = new SparkMaxConfig();
     m_PivotMotorConfig = new SparkMaxConfig();
+    m_intakeMotorConfig = new SparkMaxConfig();
 
-    m_FlywheelMotor.configure(m_FlywheelMotorConfig, ``null, null);
+    m_FlywheelMotor.configure(m_FlywheelMotorConfig, null, null);
     m_PivotMotor.configure(m_FlywheelMotorConfig, null, null);
+    m_intakeMotor.configure(m_intakeMotorConfig, null, null);
   } // floyd
   public void setPivotSpeed(double speed){
     is_pivotMotor_running = speed!= 0;
@@ -48,6 +57,11 @@ public class Shooter extends SubsystemBase {
     return m_PivotMotorEncoder.getVelocity();
   }
   
+  public void setIntakeMotorSpeed(double speed) {
+    is_Flywheel_running = speed != 0;
+    m_intakeMotor.set(speed);
+  }
+
   public void setFlywheelMotorSpeed(double speed) {
     is_Flywheel_running = speed != 0;
     m_FlywheelMotor.set(speed);
