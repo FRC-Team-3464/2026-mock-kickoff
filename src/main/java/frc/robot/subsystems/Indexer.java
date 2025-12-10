@@ -9,6 +9,9 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Indexer extends SubsystemBase {
@@ -42,7 +45,12 @@ public class Indexer extends SubsystemBase {
     return m_encoder.getPosition();
   }
 
-
+  public Command spin(double speed) {
+    return Commands.runEnd(
+      () -> setSpeed(speed),
+      () -> stop()
+    );
+  }
 
   @Override
   public void periodic() {
