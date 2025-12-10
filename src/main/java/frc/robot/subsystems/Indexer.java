@@ -23,6 +23,7 @@ public class Indexer extends SubsystemBase {
   /** Creates a new Indexer. */
   public Indexer() {
     rightMotorConfig.follow(m_leftMotor, true);
+    m_rightMotor.configure(rightMotorConfig, null, null);
   }
 
   public void setSpeed(double speed) {
