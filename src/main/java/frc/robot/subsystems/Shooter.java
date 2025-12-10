@@ -22,6 +22,7 @@ public class Shooter extends SubsystemBase {
   public RelativeEncoder m_leftPivotMotorEncoder = m_leftPivotMotor.getEncoder();
   public RelativeEncoder m_rightPivotMotorEncoder = m_rightPivotMotor.getEncoder();
 
+  private boolean is_running = false;
   public SparkMaxConfig m_leftPivotMotorConfig;
   public SparkMaxConfig m_rightPivotMotorConfig;
   public SparkMaxConfig m_leftFlywheelMotorConfig;
@@ -32,7 +33,6 @@ public class Shooter extends SubsystemBase {
     m_rightFlywheelMotorConfig = new SparkMaxConfig();
     m_leftPivotMotorConfig = new SparkMaxConfig();
     m_rightPivotMotorConfig = new SparkMaxConfig();
-    
 
     m_rightPivotMotorConfig.follow(m_rightPivotMotor, true);
     m_rightFlywheelMotorConfig.follow(m_leftFlywheelMotor, true);
@@ -42,6 +42,10 @@ public class Shooter extends SubsystemBase {
     m_leftPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
     m_rightPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
   } // floyd
+  public void setpivotmotorspeed(double speed){
+    is_running = speed!= 0;
+    
+  }
 
   public void setFlywheelMotorSpeed(double speed) {
     
