@@ -14,28 +14,27 @@ public class Shooter extends SubsystemBase {
   /** Creates a new Shooter. */ 
   public final SparkMax m_leftFlywheelMotor = new SparkMax(7, MotorType.kBrushless);
   public final SparkMax m_rightFlywheelMotor = new SparkMax(8, MotorType.kBrushless);
-  public final SparkMax m_leftpivotMotor = new SparkMax(9, MotorType.kBrushless);
-  public final SparkMax m_rightpivotMotor = new SparkMax(10, MotorType.kBrushless);
+  public final SparkMax m_leftPivotMotor = new SparkMax(9, MotorType.kBrushless);
+  public final SparkMax m_rightPivotMotor = new SparkMax(10, MotorType.kBrushless);
 
-  public SparkMaxConfig m_leftpivotMotorConfig;
-  public SparkMaxConfig m_rightpivotMotorConfig;
+  public SparkMaxConfig m_leftPivotMotorConfig;
+  public SparkMaxConfig m_rightPivotMotorConfig;
   public SparkMaxConfig m_leftFlywheelMotorConfig;
   public SparkMaxConfig m_rightFlywheelMotorConfig;
   
   public Shooter() {
     m_leftFlywheelMotorConfig = new SparkMaxConfig();
     m_rightFlywheelMotorConfig = new SparkMaxConfig();
-    m_leftpivotMotorConfig = new SparkMaxConfig();
-    m_rightpivotMotorConfig = new SparkMaxConfig();
+    m_leftPivotMotorConfig = new SparkMaxConfig();
+    m_rightPivotMotorConfig = new SparkMaxConfig();
 
-    m_rightpivotMotorConfig.follow(m_rightpivotMotor, true);
+    m_rightPivotMotorConfig.follow(m_rightPivotMotor, true);
     m_rightFlywheelMotorConfig.follow(m_leftFlywheelMotor, true);
 
     m_leftFlywheelMotor.configure(m_leftFlywheelMotorConfig, null, null);
     m_rightFlywheelMotor.configure(m_leftFlywheelMotorConfig, null, null);
-
-    
-
+    m_leftPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
+    m_rightPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
   } // floyd
   
   @Override
