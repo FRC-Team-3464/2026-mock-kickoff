@@ -17,6 +17,11 @@ public class Shooter extends SubsystemBase {
   public final SparkMax m_leftPivotMotor = new SparkMax(9, MotorType.kBrushless);
   public final SparkMax m_rightPivotMotor = new SparkMax(10, MotorType.kBrushless);
 
+  public RelativeEncoder m_leftFlywheelMotorEncoder = m_leftFlywheelMotor.getEncoder();
+  public RelativeEncoder m_rightFlywheelMotorEncoder = m_rightFlywheelMotor.getEncoder();
+  public RelativeEncoder m_leftPivotMotorEncoder = m_leftPivotMotor.getEncoder();
+  public RelativeEncoder m_rightPivotMotorEncoder = m_rightPivotMotor.getEncoder();
+
   public SparkMaxConfig m_leftPivotMotorConfig;
   public SparkMaxConfig m_rightPivotMotorConfig;
   public SparkMaxConfig m_leftFlywheelMotorConfig;
@@ -27,6 +32,7 @@ public class Shooter extends SubsystemBase {
     m_rightFlywheelMotorConfig = new SparkMaxConfig();
     m_leftPivotMotorConfig = new SparkMaxConfig();
     m_rightPivotMotorConfig = new SparkMaxConfig();
+    
 
     m_rightPivotMotorConfig.follow(m_rightPivotMotor, true);
     m_rightFlywheelMotorConfig.follow(m_leftFlywheelMotor, true);
@@ -36,6 +42,10 @@ public class Shooter extends SubsystemBase {
     m_leftPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
     m_rightPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
   } // floyd
+
+  public void setFlywheelMotorSpeed(double speed) {
+    
+  }
   
   @Override
   public void periodic() {
