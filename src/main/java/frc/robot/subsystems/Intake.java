@@ -52,6 +52,9 @@ public double getRollerVelocity(){
 public double getRollerPosition(){
   return getRollerPosition();
 }
+public boolean getExtendedLimit(){
+  return m_extendedLimit.get();
+}
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
