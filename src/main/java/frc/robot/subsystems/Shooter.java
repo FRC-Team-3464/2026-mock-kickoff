@@ -41,10 +41,20 @@ public class Shooter extends SubsystemBase {
     m_leftPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
     m_rightPivotMotor.configure(m_leftFlywheelMotorConfig, null, null);
   } // floyd
-  public void setpivotmotorspeed(double speed){
+  public void setPivotSpeed(double speed){
     is_pivotMotor_running = speed!= 0;
-    
+    m_leftPivotMotor.set(speed);
   }
+  public void stopPivot(double speed){
+    m_leftPivotMotor.set(0);
+  }
+  public double getPivotVelocity(){
+    return m_leftPivotMotorEncoder.getPosition();
+  }
+  public double getPivotPosition(){
+    return m_leftPivotMotorEncoder.getVelocity();
+  }
+
 
   public void setFlywheelMotorSpeed(double speed) {
     is_Flywheel_running = speed != 0;
