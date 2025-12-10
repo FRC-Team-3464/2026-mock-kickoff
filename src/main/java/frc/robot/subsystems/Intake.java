@@ -1,3 +1,5 @@
+package frc.robot.subsystems;
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -29,7 +31,27 @@ public class Intake extends SubsystemBase {
 public void setPivotSpeed(double speed){
   m_pivotLeftMotor.set(speed);
 }
-
+public void stopPivot(){
+  m_pivotLeftMotor.stopMotor();
+}
+public void setRollerSpeed(double speed){
+  m_rollerMotor.set(speed);
+}
+public void stopRoller(){
+  m_rollerMotor.stopMotor();
+}
+public double getPivotVelocity(){
+  return getPivotVelocity();
+}
+public double getPivotPosition(){
+return getPivotPosition();
+}
+public double getRollerVelocity(){
+  return getRollerVelocity();
+}
+public double getRollerPosition(){
+  return getRollerPosition();
+}
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
