@@ -65,8 +65,6 @@ public class Shooter extends SubsystemBase {
     return m_PivotMotorEncoder.getVelocity();
   }
   
-  
-  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
