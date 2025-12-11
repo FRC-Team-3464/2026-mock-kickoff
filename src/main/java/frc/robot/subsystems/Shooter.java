@@ -18,14 +18,13 @@ public class Shooter extends SubsystemBase {
   public final SparkMax m_PivotMotor = new SparkMax(8, MotorType.kBrushless);
   public final SparkMax m_intakeMotor = new SparkMax(9, MotorType.kBrushless);
 
-
   public RelativeEncoder m_intakeMotorEncoder = m_intakeMotor.getEncoder();
   public RelativeEncoder m_FlywheelMotorEncoder = m_FlywheelMotor.getEncoder();
   public RelativeEncoder m_PivotMotorEncoder = m_PivotMotor.getEncoder();
 
-  private boolean is_Flywheel_running = false;
-  private boolean is_pivotMotor_running = false;
-  private boolean is_intakeMotor_running = false;
+  private boolean m_isFlywheelRunning = false;
+  private boolean m_ispivotMotorRunning = false;
+  private boolean m_isintakeMotorRunning = false;
   public SparkMaxConfig m_intakeMotorConfig;
   public SparkMaxConfig m_PivotMotorConfig;
   public SparkMaxConfig m_FlywheelMotorConfig;
@@ -36,13 +35,22 @@ public class Shooter extends SubsystemBase {
     m_intakeMotorConfig = new SparkMaxConfig();
 
     m_FlywheelMotor.configure(m_FlywheelMotorConfig, null, null);
-    m_PivotMotor.configure(m_FlywheelMotorConfig, null, null);
+    m_PivotMotor.configure(m_PivotMotorConfig, null, null);
     m_intakeMotor.configure(m_intakeMotorConfig, null, null);
   } // floyd
   public void setPivotSpeed(double speed){
-    is_pivotMotor_running = speed!= 0;
+    m_ispivotMotorRunning = speed!= 0;
     m_PivotMotor.set(speed);
-    m_PivotMotor.set(speed);
+  }
+
+  public void setIntakeMotorSpeed(double speed) {
+    m_isFlywheelRunning = speed != 0;
+    m_intakeMotor.set(speed);
+  }
+
+  public void setFlywheelMotorSpeed(double speed) {
+    m_isFlywheelRunning = speed != 0;
+    m_FlywheelMotor.set(speed);
   }
 
   public void stopPivot(double speed){
@@ -57,15 +65,7 @@ public class Shooter extends SubsystemBase {
     return m_PivotMotorEncoder.getVelocity();
   }
   
-  public void setIntakeMotorSpeed(double speed) {
-    is_Flywheel_running = speed != 0;
-    m_intakeMotor.set(speed);
-  }
-
-  public void setFlywheelMotorSpeed(double speed) {
-    is_Flywheel_running = speed != 0;
-    m_FlywheelMotor.set(speed);
-  }
+  
   
   @Override
   public void periodic() {
