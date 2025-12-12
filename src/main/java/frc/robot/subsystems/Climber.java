@@ -17,18 +17,26 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
 
-  public Command extendClimberCommand(Climber subsystem) {
-    if (!subsystem.getTopLimit()) {
-      return Commands.startEnd(() -> subsystem.setSpeed(0.5), () -> subsystem.stop()).until(() -> subsystem.getTopLimit()).withName("Extend Climber");
+  public Command extendClimberCommand() {
+    if (!getTopLimit()) {
+      return Commands.startEnd(() -> setSpeed(0.5), () -> stop()).until(() -> getTopLimit()).withName("Extend Climber");
     } else{
       return Commands.none();
     }
   }
 
-  public Command retractClimberCommand(Climber subsystem) {
-    if (!subsystem.getBottomLimit()) {
-      return Commands.startEnd(() -> subsystem.setSpeed(-0.5), () -> subsystem.stop()).until(() -> subsystem.getBottomLimit()).withName("Retract Climber");
+  public Command retractClimberCommand() {
+    if (!getBottomLimit()) {
+      return Commands.startEnd(() -> setSpeed(-0.5), () -> stop()).until(() -> getBottomLimit()).withName("Retract Climber");
     } else{
+      return Commands.none();
+    }
+  }
+
+  public Command autoClimbSequence() {
+    if(!touchingBar()){
+      return extendClimberCommand().andThen(retractClimberCommand()).until(() -> touchingBar()).withName("Automatic Climber");
+    }else{
       return Commands.none();
     }
   }
@@ -37,6 +45,7 @@ public class Climber extends SubsystemBase {
 
   private final DigitalInput m_topLimit = new DigitalInput(1);
   private final DigitalInput m_bottomLimit = new DigitalInput(2);
+  private final DigitalInput m_barLimit = new DigitalInput(100);
   private final RelativeEncoder m_encoder = m_motor.getEncoder();
 
   private SparkMaxConfig m_leftMotorConfig;
@@ -91,6 +100,10 @@ public class Climber extends SubsystemBase {
 
   public double getPosition() {
     return m_encoder.getPosition();
+  }
+
+  public boolean touchingBar(){
+    return m_barLimit.get();
   }
 
   @Override

@@ -22,8 +22,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
 
   private final Climber m_ClimberSubsystem = new Climber();
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -54,8 +56,9 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_driverController.rightBumper().whileTrue(new Extend(m_ClimberSubsystem));
-    m_driverController.leftBumper().whileTrue(new Retract(m_ClimberSubsystem));
+    m_driverController.rightBumper().whileTrue(m_ClimberSubsystem.extendClimberCommand());
+    m_driverController.leftBumper().whileTrue(m_ClimberSubsystem.retractClimberCommand());
+    m_driverController.a().whileTrue(m_ClimberSubsystem.autoClimbSequence());
     
   }
 
