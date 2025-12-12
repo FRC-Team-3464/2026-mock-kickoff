@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -14,6 +18,11 @@ package frc.robot;
  */
 public final class Constants {
   public static class OperatorConstants {
+    public static final Joystick M_JOYSTICK = new Joystick(1);
+    public static final JoystickButton M_FIVE = new JoystickButton(M_JOYSTICK, 5);
+    public static final JoystickButton M_SIX = new JoystickButton(M_JOYSTICK, 6);
+    public static final JoystickButton M_SEVEN = new JoystickButton(M_JOYSTICK, 7);
+    public static final JoystickButton M_EIGHT = new JoystickButton(M_JOYSTICK, 8);
     public static final int kDriverControllerPort = 0;
   }
 }
