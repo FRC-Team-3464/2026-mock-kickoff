@@ -38,9 +38,14 @@ public class Shooter extends SubsystemBase {
     m_PivotMotor.configure(m_PivotMotorConfig, null, null);
     m_intakeMotor.configure(m_intakeMotorConfig, null, null);
   } // floyd
+
   public void setPivotSpeed(double speed){
     m_ispivotMotorRunning = speed!= 0;
     m_PivotMotor.set(speed);
+  }
+
+  public void stopPivot(double speed) {
+    m_PivotMotor.set(0);
   }
 
   public void setIntakeMotorSpeed(double speed) {
@@ -48,23 +53,36 @@ public class Shooter extends SubsystemBase {
     m_intakeMotor.set(speed);
   }
 
+  public void stopIntakeMotor() {
+    m_intakeMotor.set(0);
+  }
   public void setFlywheelMotorSpeed(double speed) {
     m_isFlywheelRunning = speed != 0;
     m_FlywheelMotor.set(speed);
   }
 
-  public void stopPivot(double speed){
-    m_PivotMotor.set(0);
+  public void stopFlywheelMotor() {
+     m_FlywheelMotor
   }
+  
 
-  public double getPivotVelocity(){
+  public double getPivotVelocity() {
     return m_PivotMotorEncoder.getPosition();
   }
 
-  public double getPivotPosition(){
+  public double getPivotPosition() {
     return m_PivotMotorEncoder.getVelocity();
   }
   
+  public double getFlywheelVelocity() {
+    return m_FlywheelMotorEncoder.getVelocity();
+  }
+
+  public double getFlywheelPosition() {
+    return m_FlywheelMotorEncoder.getPosition();
+  }
+
+  public 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
