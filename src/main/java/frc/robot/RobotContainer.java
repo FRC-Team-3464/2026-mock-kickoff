@@ -52,6 +52,8 @@ public class RobotContainer {
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
     m_driverController.y().whileTrue(m_indexer.spin(0.5));
+    Constants.OperatorConstants.button3.onTrue(m_indexer.spin(0.5));
+    Constants.OperatorConstants.button4.onTrue(m_indexer.spin(-0.5));
   }
 
   /**

@@ -6,6 +6,9 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import java.util.function.BooleanSupplier;
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
@@ -13,15 +16,17 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class Indexer extends SubsystemBase {
+
+  public double rotations;
 
   private final SparkMax m_leftMotor = new SparkMax(2, MotorType.kBrushless);
   private final SparkMax m_rightMotor = new SparkMax(3, MotorType.kBrushless);
   private final RelativeEncoder m_encoder = m_leftMotor.getEncoder();
   private final SparkMaxConfig leftMotorConfig = new SparkMaxConfig();
   private final SparkMaxConfig rightMotorConfig = new SparkMaxConfig();
-  
 
   /** Creates a new Indexer. */
   public Indexer() {
@@ -31,6 +36,7 @@ public class Indexer extends SubsystemBase {
 
   public void setSpeed(double speed) {
     m_leftMotor.set(speed);
+
   }
 
   public void stop() {
@@ -47,9 +53,20 @@ public class Indexer extends SubsystemBase {
 
   public Command spin(double speed) {
     return Commands.runEnd(
-      () -> setSpeed(speed),
-      () -> stop()
-    );
+        () -> setSpeed(speed),
+        () -> stop()).withName("Spin Indexer");
+  }
+
+  public Command rotate() {
+    double rotations = getPosition();
+    // Use .until() after the spin until the difference in position is at least 72
+    return spin(0.5)
+    .until(double rotations >= 72);
+    .withName("Rotate Indexer");
+  }
+
+  public void JoystickButton() {
+
   }
 
   @Override
