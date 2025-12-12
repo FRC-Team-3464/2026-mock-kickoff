@@ -10,6 +10,7 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   private final SparkMax m_pivotLeftMotor = new SparkMax(1, MotorType.kBrushless);
@@ -22,39 +23,54 @@ public class Intake extends SubsystemBase {
   private final RelativeEncoder m_rollEncoder = m_rollerMotor.getEncoder();
   private final DigitalInput m_innerLimit = new DigitalInput(4);
   private final DigitalInput m_extendedLimit = new DigitalInput(5);
+
   public Intake() {
     m_pivotLeftMotorConfig = new SparkMaxConfig();
     m_pivotRightMotorConfig = new SparkMaxConfig();
     m_rollerMotorConfig = new SparkMaxConfig();
     m_pivotRightMotorConfig.follow(m_pivotLeftMotor, true);
-}
-public void setPivotSpeed(double speed){
-  m_pivotLeftMotor.set(speed);
-}
-public void stopPivot(){
-  m_pivotLeftMotor.stopMotor();
-}
-public void setRollerSpeed(double speed){
-  m_rollerMotor.set(speed);
-}
-public void stopRoller(){
-  m_rollerMotor.stopMotor();
-}
-public double getPivotVelocity(){
-  return getPivotVelocity();
-}
-public double getPivotPosition(){
-return getPivotPosition();
-}
-public double getRollerVelocity(){
-  return getRollerVelocity();
-}
-public double getRollerPosition(){
-  return getRollerPosition();
-}
-public boolean getExtendedLimit(){
-  return m_extendedLimit.get();
-}
+    m_pivotRightMotor.configure(m_pivotRightMotorConfig, null, null);
+  }
+
+  public void setPivotSpeed(double speed) {
+    m_pivotLeftMotor.set(speed);
+  }
+
+  public void stopPivot() {
+    m_pivotLeftMotor.stopMotor();
+  }
+
+  public void setRollerSpeed(double speed) {
+    m_rollerMotor.set(speed);
+  }
+
+  public void stopRoller() {
+    m_rollerMotor.stopMotor();
+  }
+
+  public double getPivotVelocity() {
+    return m_pivotEncoder.getVelocity();
+  }
+
+  public double getPivotPosition() {
+    return m_pivotEncoder.getPosition();
+  }
+
+  public double getRollerVelocity() {
+    return m_rollEncoder.getVelocity();
+  }
+
+  public double getRollerPosition() {
+    return m_rollEncoder.getPosition();
+  }
+
+  public boolean getExtendedLimit() {
+    return m_extendedLimit.get();
+  }
+  public boolean getInnerLimit(){
+    return m_innerLimit.get();
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
