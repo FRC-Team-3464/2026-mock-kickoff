@@ -58,7 +58,7 @@ public class RobotContainer {
 
     m_driverController.rightBumper().whileTrue(m_ClimberSubsystem.extendClimberCommand());
     m_driverController.leftBumper().whileTrue(m_ClimberSubsystem.retractClimberCommand());
-    m_driverController.a().whileTrue(m_ClimberSubsystem.autoClimbSequence());
+    m_driverController.leftTrigger().whileTrue(m_ClimberSubsystem.autoClimbSequence());
     
   }
 
