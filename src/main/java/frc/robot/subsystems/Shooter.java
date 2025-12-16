@@ -12,6 +12,8 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -26,7 +28,8 @@ public class Shooter extends SubsystemBase {
   public RelativeEncoder m_intakeMotorEncoder = m_intakeMotor.getEncoder();
   public RelativeEncoder m_FlywheelMotorEncoder = m_FlywheelMotor.getEncoder();
   public RelativeEncoder m_PivotMotorEncoder = m_PivotMotor.getEncoder();
-
+  public final DigitalInput m_minimumPivotSwitch = new DigitalInput(10);
+  public final DigitalInput m_maximumPivotSwitch = new DigitalInput(11);
   private boolean m_isFlywheelRunning = false;
   private boolean m_ispivotMotorRunning = false;
   private boolean m_isintakeMotorRunning = false;
@@ -65,10 +68,6 @@ public class Shooter extends SubsystemBase {
     m_isFlywheelRunning = speed != 0;
     m_FlywheelMotor.set(speed);
   }
-
-  public void stopFlywheelMotor() {
-     m_FlywheelMotor
-  }
   
 
   public double getPivotVelocity() {
@@ -86,10 +85,5 @@ public class Shooter extends SubsystemBase {
   public double getFlywheelPosition() {
     return m_FlywheelMotorEncoder.getPosition();
   }
-
-  public 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
 }
+
