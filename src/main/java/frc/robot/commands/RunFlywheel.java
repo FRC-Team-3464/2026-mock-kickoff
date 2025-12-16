@@ -32,7 +32,7 @@ public class RunFlywheel extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Subsystem.setIntakeMotorSpeed(0);
+    m_Subsystem.setFlywheelMotorSpeed(0);
   }
 
   // Returns true when the command should end.
