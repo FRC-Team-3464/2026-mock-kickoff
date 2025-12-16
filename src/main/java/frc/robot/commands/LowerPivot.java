@@ -4,19 +4,18 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Shooter;
+import edu.wpi.first.wpilibj2.command.Command;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class RunFlywheel extends Command {
-  private Shooter m_Subsystem = new Shooter();
+public class LowerPivot extends Command {
+  /** Creates a new LowerPivot. */
+  private Shooter m_subsystem = new Shooter();
   private double m_Speed;
-  /** Creates a new RunFlywheel. */
-  public RunFlywheel(Shooter subsystem, double speed) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_Subsystem = subsystem;
+  public LowerPivot(Shooter subsystem, double speed) {
+    m_subsystem = subsystem;
     m_Speed = speed;
-    addRequirements(m_Subsystem);
+    addRequirements(m_subsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -26,13 +25,13 @@ public class RunFlywheel extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Subsystem.setIntakeMotorSpeed(m_Speed);
+    m_subsystem.setPivotSpeed(0-m_Speed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Subsystem.setIntakeMotorSpeed(0);
+    m_subsystem.setPivotSpeed(0);
   }
 
   // Returns true when the command should end.

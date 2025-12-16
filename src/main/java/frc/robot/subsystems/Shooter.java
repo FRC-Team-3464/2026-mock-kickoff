@@ -9,6 +9,8 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -17,6 +19,9 @@ public class Shooter extends SubsystemBase {
   public final SparkMax m_FlywheelMotor = new SparkMax(7, MotorType.kBrushless);
   public final SparkMax m_PivotMotor = new SparkMax(8, MotorType.kBrushless);
   public final SparkMax m_intakeMotor = new SparkMax(9, MotorType.kBrushless);
+
+  public DigitalInput m_topLimitSwitch = new DigitalInput(10);
+  public DigitalInput m_bottomLimitSwitch = new DigitalInput(11);
 
   public RelativeEncoder m_intakeMotorEncoder = m_intakeMotor.getEncoder();
   public RelativeEncoder m_FlywheelMotorEncoder = m_FlywheelMotor.getEncoder();
