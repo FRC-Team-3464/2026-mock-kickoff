@@ -11,6 +11,13 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+/**
+ * Class intake is used to intake the power cells and then transfer to shooter
+ * 
+ * @author Senuth
+ * @author Harsh
+ * @author KH
+ */
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
   private final SparkMax m_pivotLeftMotor = new SparkMax(1, MotorType.kBrushless);
@@ -32,42 +39,89 @@ public class Intake extends SubsystemBase {
     m_pivotRightMotor.configure(m_pivotRightMotorConfig, null, null);
   }
 
+  /** 
+   * Sets the pivot motor speed
+   * 
+   * @param speed the speed to run the pivot motor at (-1.0 to 1.0)
+   */
   public void setPivotSpeed(double speed) {
     m_pivotLeftMotor.set(speed);
   }
 
+  /** 
+   * Stops the pivot motor
+   */
   public void stopPivot() {
     m_pivotLeftMotor.stopMotor();
   }
 
+  /** 
+   * Sets the roller motor speed
+   * 
+   * @param speed the speed to run the roller motor at (-1.0 to 1.0)
+   */
   public void setRollerSpeed(double speed) {
     m_rollerMotor.set(speed);
   }
 
+  /** 
+   * Stops the roller motor speed
+   */
   public void stopRoller() {
     m_rollerMotor.stopMotor();
   }
 
+  /** 
+   * Get the pivot motor speed
+   * 
+   * @return the speed of the pivot motor in RPM
+   */
   public double getPivotVelocity() {
     return m_pivotEncoder.getVelocity();
   }
 
+  /** 
+   * Get the pivot position
+   * 
+   * @return the position of the pivot motor in rotations
+   */
   public double getPivotPosition() {
     return m_pivotEncoder.getPosition();
   }
 
+ /** 
+   * Get the roller velocity
+   * 
+   * @return the speed of the roller motor in RPM
+   */
   public double getRollerVelocity() {
     return m_rollEncoder.getVelocity();
   }
 
+  /** 
+   * Get the roller position
+   * 
+   * @return position of the roller in rotations
+   */
   public double getRollerPosition() {
     return m_rollEncoder.getPosition();
   }
 
+ /** 
+   * Checks if the intake is fully extended
+   * 
+   * @return true if the intake is fully extended, false otherwise
+   */
   public boolean getExtendedLimit() {
     return m_extendedLimit.get();
   }
-  public boolean getInnerLimit(){
+
+  /** 
+   * Checks if the intake is fully retracted, false otherwise
+   * 
+   * @return the inner limit
+   */
+  public boolean getInnerLimit() {
     return m_innerLimit.get();
   }
 
