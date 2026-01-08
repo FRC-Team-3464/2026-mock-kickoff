@@ -9,8 +9,8 @@ import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Extend;
 import frc.robot.commands.Retract;
-import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Climber.Climber;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -59,7 +59,6 @@ public class RobotContainer {
     m_driverController.rightBumper().whileTrue(m_ClimberSubsystem.extendClimberCommand());
     m_driverController.leftBumper().whileTrue(m_ClimberSubsystem.retractClimberCommand());
     m_driverController.leftTrigger().whileTrue(m_ClimberSubsystem.autoClimbSequence());
-    
   }
 
   /**

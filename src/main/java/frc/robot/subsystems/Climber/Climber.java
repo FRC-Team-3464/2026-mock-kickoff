@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems;
+package frc.robot.subsystems.Climber;
 
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -13,9 +13,12 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class Climber extends SubsystemBase {
   /** Creates a new Climber. */
+
+  public Trigger isExtended = new Trigger(()->getTopLimit());
 
   public Command extendClimberCommand() {
     if (!getTopLimit()) {
@@ -41,6 +44,9 @@ public class Climber extends SubsystemBase {
     }
   }
 
+  //this.isExtended
+  //.onTrue(this.extendClimberCommand());
+
   private final SparkMax m_motor = new SparkMax(1, MotorType.kBrushless);
 
   private final DigitalInput m_topLimit = new DigitalInput(1);
@@ -54,33 +60,9 @@ public class Climber extends SubsystemBase {
   public Climber() {
   }
 
-  /*
-   * public enum ClimberState{
-   * CLIMBER_UP,
-   * CLIMBER_DOWN,
-   * CLIMBER_STOP
-   * }
-   */
-
   public void stop() {
     m_motor.set(0);
   }
-
-  // public void extendClimber() { //ExtendClimber Idea
-  // if(m_topLimit.get()) {
-  // m_motor.set(0);
-  // } else{
-  // m_motor.set(0.5);
-  // }
-  // }
-
-  // public void retractClimber() { //RetractClimber Idea
-  // if(m_bottomLimit.get()) {
-  // m_motor.set(0);
-  // } else {
-  // m_motor.set(-0.5);
-  // }
-  // }
 
   public void setSpeed(double speed) { // setSpeed Idea
     m_motor.set(speed);
